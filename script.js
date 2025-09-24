@@ -45,8 +45,12 @@ async function convertCurrency(e){
     const data = await response.json();
 
     const rate = data.rates[toCurrencyValue];
-    const convertedAmount = (amount * rate).toFixed(2);
+const convertedAmount = (amount * rate).toFixed(2);
 
-    resultDiv.textContent = `${amount} ${fromCurrencyValue} = ${convertedAmount} ${toCurrencyValue}`;
+// format both values with commas
+const formattedAmount = amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const formattedConverted = parseFloat(convertedAmount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+resultDiv.textContent = `${formattedAmount} ${fromCurrencyValue} = ${formattedConverted} ${toCurrencyValue}`;
 
 }
